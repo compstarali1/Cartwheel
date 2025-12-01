@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=0.6">
+<style>
+@charset "UTF-8";
+@import url(https://fonts.googleapis.com/css?family=Nunito+Sans:300,400,600,700,800);
+*,
+:after,
+:before {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  margin:0;
+  font-family: Arial, sans-serif;
+  background-color: #f6f6f6;
+  overflow: hidden;
+}
+
+section {
+	height:100dvh;
+	display:grid;
+	place-items:center;
+	background-image:linear-gradient(#00000000);
+	position: relative;
+}
+
+/* Carousel ul with tilt and larger radius */
+ul {
+	--n:15; /* number of items */
+	--duration:30s;
+	--caro-tiltZ:30deg;
+	--caro-tiltX:15deg;
+	--caro-max-radius:60em;
+	--caro-radius:min(55vw, var(--caro-max-radius));
+	--caro-omtrek:calc( 2 * 3.14159 * var(--caro-radius) );
+	--item-size-bruto:calc( var(--caro-omtrek) / var(--n) );
+	--item-spacing:.5;
+	--item-size-netto:calc( var(--item-size-bruto) / (1 + var(--item-spacing)) );
+	--item-tiltX:10deg;
+
+	margin:0;
+	padding:0;
+	list-style-type:"";
+	display:grid;
+	perspective:1000px;
+	transform-style:preserve-3d;
+}
+
+/* individual li items */
+li {
+	--delay:calc( var(--duration) / var(--n) * var(--i) - var(--duration) );
+	grid-area:1/1;
+	width:var(--item-size-netto);
+	transform:
+		rotateZ( var(--caro-tiltZ) )
+		rotateX( var(--caro-tiltX) )
+		rotateY( var(--item-rotateY) )
+		translateZ( var(--caro-radius) )
+		rotateX( var(--item-tiltX) );
+	animation:
+		item-rotateY var(--duration) var(--delay) infinite linear;
+}
+
+@keyframes item-rotateY {
+	100% {
+		--item-rotateY:360deg;
+	}
+}
+
+@property --item-rotateY {
+	syntax:"<angle>";
+	inherits:true;
+	initial-value:0deg;
+}
+
+li img {
+	width:150%;
+	object-fit: cover;
+	border-radius:10%;
+	box-shadow:0 4px 12px rgba(0,0,0,0.3);
+	opacity:0.4; /* carousel images semi-transparent */
+}
+
+/* large rear image behind carousel */
+.rear-img {
+	position:absolute;
+	top:50%;
+	left:50%;
+	transform: translate(-50%, -50%);
+	max-width:30vw;
+	height:auto;
+	border-radius:10%;
+	box-shadow:0 0 35px rgba(0,0,0,0.5);
+	z-index:0;
+	opacity:1.0; /* fully visible */
+}
+
+/* 3D animated text */
+.animated-text {
+	position:absolute;
+	bottom:5%;
+	left:50%;
+	transform:translateX(-50%);
+	font-size:9vw;
+	font-weight:800;
+	color:#FF69B4;
+	text-shadow:
+		0 0 5px #fff,
+		0 0 10px #FF69B4,
+		0 0 15px #FF1493,
+		0 0 20px #FF69B4;
+	animation: glowPulse 2s infinite alternate, rotate3D 10s linear infinite;
+	white-space: nowrap;
+}
+
+@keyframes glowPulse {
+	0% { text-shadow: 0 0 5px #fff, 0 0 10px #FF69B4, 0 0 15px #FF1493, 0 0 20px #FF69B4; }
+	50% { text-shadow: 0 0 10px #fff, 0 0 20px #FF69B4, 0 0 25px #FF1493, 0 0 30px #FF69B4; }
+	100% { text-shadow: 0 0 5px #fff, 0 0 10px #FF69B4, 0 0 15px #FF1493, 0 0 20px #FF69B4; }
+}
+
+@keyframes rotate3D {
+	0% { transform: translateX(-50%) rotateX(0deg) rotateY(0deg); }
+	50% { transform: translateX(-50%) rotateX(10deg) rotateY(15deg); }
+	100% { transform: translateX(-50%) rotateX(0deg) rotateY(0deg); }
+}
+</style>
+</head>
+<body>
+<section>
+    <!-- Large image behind cartwheel -->
+    <img src="https://iili.io/K7bTu3v.png" alt="Rear" class="rear-img">
+
+    <!-- Carousel rotating images -->
+    <ul>
+        <li style="--i:1"><img src="https://iili.io/fx9BcRp.png" alt=""></li>
+        <li style="--i:2"><img src="https://iili.io/fx9BaJR.png" alt=""></li>
+        <li style="--i:3"><img src="https://iili.io/fx9B7Uv.png" alt=""></li>
+        <li style="--i:4"><img src="https://iili.io/fx9BlON.png" alt=""></li>
+        <li style="--i:5"><img src="https://iili.io/fx9BGWX.png" alt=""></li>
+        <li style="--i:6"><img src="https://iili.io/fx9BX0G.png" alt=""></li>
+        <li style="--i:7"><img src="https://iili.io/fx9Bhgf.png" alt=""></li>
+        <li style="--i:8"><img src="https://iili.io/fx9BN5l.jpg" alt=""></li>
+        <li style="--i:9"><img src="https://iili.io/fx9BwJ4.jpg" alt=""></li>
+        <li style="--i:10"><img src="https://iili.io/fx9BebS.png" alt=""></li>
+        <li style="--i:11"><img src="https://iili.io/fx9Bvz7.jpg" alt=""></li>
+        <li style="--i:12"><img src="https://iili.io/fx9B8X9.png" alt=""></li>
+        <li style="--i:13"><img src="https://iili.io/fx9BSse.jpg" alt=""></li>
+        <li style="--i:14"><img src="https://iili.io/KXL0jqu.png" alt=""></li>
+        <li style="--i:15"><img src="https://iili.io/KXL0jqu.png" alt=""></li>
+    </ul>
+
+    <!-- 3D animated text at bottom -->
+    <div class="animated-text">Alice I Love You Baby</div>
+</section>
+</body>
+</html>
